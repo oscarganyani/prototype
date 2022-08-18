@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1 align = center> Welcome to Web File Manager</h1>
+    <a href="{{url_for('logout')}}">Press here to logout</a> 
+    <ul>
+
+            <form
+                method = "POST" action=""
+                enctype="multipart/form-data"
+            >
+                <input type = "file" name="file_list[]" multiple="true" autocomplete="off" required>
+                <input type="submit" value="Upload file(s)" formaction="http://localhost:5000/upload" formmethod="post">
+                
+                
+             </form><br>
+             <form >
+                <input type="submit" value="New folder" formaction="/md"/> 
+                <input name="folder" type="text" value="new_folder"/>
+                
+            </form><br>
+            <a href="/download"><button class='btn btn-default'>Download file(s)</button></a>
+
+            <ul>
+                {% for file in filenames %}
+                 <li><a href="{{url_for('uploadfile', filename=file)}}">{{file}}</a></li>
+                {% endfor %}
+               </ul>
+               {% for folder in foldernames %}
+               <li><a href="{{url_for('md', folders=folder)}}">{{folder}}</a></li>
+               {% endfor %}
+               
+        
+    
+    
+    </ul>
+</body>
+</html>
